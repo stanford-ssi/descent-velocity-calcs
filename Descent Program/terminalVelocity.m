@@ -25,7 +25,7 @@ for i = 2:numel(T)
 end
 
 figure(1)
-plot(t,h,t,ones(size(t))*he)
+plot(t,h,t,ones(size(t))*he,t,h0 - 4.9*(t.^2))
 xlabel("Time (s)")
 ylabel("Height (m)")
 ylim([0 h0])
@@ -40,3 +40,10 @@ plot(h,v)
 xlabel("Height (m)")
 ylabel("Velocity (m/s)")
 xlim([0 h0])
+
+F = m*diff(v)./diff(t);
+
+figure(4)
+plot(t,[0 F])
+xlabel("Time (s)")
+ylabel("Force (N)")
