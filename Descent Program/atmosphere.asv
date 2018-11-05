@@ -25,17 +25,10 @@ function f = atmosphere(CdFunct,m,h0,t,y)
         n = 4*devs;
         wNS = devs*devNS + wNS;
         wE = devs*devE + wE;
-        f(n+3,1) = y(n+4);
-        f(n+4,1) = sign(wNS - y(n+4))*.5*Cdw*S*((wNS - y(n+4))^2)*rho(h)/m;
-        f(n+5,1) = y(n+6);
-        f(n+6,1) = sign(wE - y(n+6))*.5*Cdw*S*((wE - y(n+6))^2)*rho(h)/m;
+        f(n+3,1) = y(4);
+        f(n+4,1) = sign(wNS - y(4))*.5*Cdw*S*((wNS - y(4))^2)*rho(h)/m;
+        f(n+5,1) = y(6);
+        f(n+6,1) = sign(wE - y(6))*.5*Cdw*S*((wE - y(6))^2)*rho(h)/m;
     end
-    
-    n = n + 4;
-    [wNS,wE] = windMaxTable(h);
-    f(n+3,1) = y(n+4);
-    f(n+4,1) = sign(wNS - y(n+4))*.5*Cdw*S*((wNS - y(n+4))^2)*rho(h)/m;
-    f(n+5,1) = y(n+6);
-    f(n+6,1) = sign(wE - y(n+6))*.5*Cdw*S*((wE - y(n+6))^2)*rho(h)/m;
 
 end

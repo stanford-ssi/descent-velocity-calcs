@@ -10,7 +10,7 @@ elseif h < 7600/3.2808                %Drogue deployment in t or h
     S = pi*(10*2.54/100)^2;           %Change 10 to 16 for IREC size drogue
 elseif h < 10500                      %Streamer option
     Cd = .1;                          %Aspect ratio = 10 -> Cd = .15 AR =20 -> Cd = .1 *Very approximate - depends on material and AR*
-    S = (4*2.54/100)*(80*2.54/100);   %Streamer Area
+    S = (*2.54/100)*(80*2.54/100);   %Streamer Area
 end
 
 end

@@ -3,14 +3,13 @@ clear all
 close all
 
 t0 = 0;
-tf = 10000;
+tf = 2000;
 vi = 0;
-vNS = 0;
-vEW = 90;
-yi = [0,vi,0,vNS,0,vEW,0,vNS,0,vEW,0,vNS,0,vEW,0,vNS,0,vEW];
+v = 
+yi = [0,vi,0,v,0,v,0,v,0,v,0,v,0,v,0,v,0,v];
 h0 = [100000]; %,100000];%,5500/3.2808,33000/3.2808,7600/3.2808,100000,100000];        %Apogee height m
 he = 4600/3.2808;   %Spaceport elevation converted to meters
-m = [15]; %,15];%,.5,20,3,15,15];            %Rocket mass kg
+m = [18.5]; %,15];%,.5,20,3,15,15];            %Rocket mass kg
 
 funct = {@Cd2Deploy}; %,@CdApogeeDeploy};%,@CdStreamer,@CdIREC,@CdMockLow,@CdRocket,@Cd2DeployRing};
 
