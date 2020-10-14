@@ -1,41 +1,31 @@
 function f = atmosphere(CdFunct,m,h0,t,y)
 
-    h = h0 - y(1);
+h = h0 - y(1);
 
-    [Cd,S] = CdFunct(h,t);
+% Modified drag
+% [Cd,Sf,Sw,L] = CdFunct(h,t);
+[Cd,S] = CdFunct(h,t);
 
-    G = 6.67*10^-11;
-    M = 5.9723*10^24;
-    re = 6371000;
-    R = 287.058;
+% Constants
+G = 6.67*10^-11;
+M = 5.9723*10^24;
+re = 6371000;
+R = 287.058;
+gamma = 1.597;
 
-    f(1,1) = y(2);
-    f(2,1) = G*M/((re + h)^2) - .5*Cd*S*(y(2)^2)*rho(h)/m;
-    %f(3,1) = G*M/((re + h)^2) - .5*Cd*S*(y(3)^2)*pressure(h)/(R*temp(h))/m; %Previous formula
+% Include Mach/improved drag
+% a = sqrt(gamma*R*temp(h));
+% Ma = y(2)/a;
+% [u, k] = viscosity(h);
+% Be = P*(L^2)/(u*k);
+% Re = u*L/k;
+% Cdcalc = (Sw*Be)/(Sf*(Re^2));
 
-    [wNS,wE] = windSpeed(h);
-    Cdw = 1;
-    f(3,1) = y(4);
-    f(4,1) = sign(wNS - y(4))*.5*Cdw*S*((wNS - y(4))^2)*rho(h)/m;
-    f(5,1) = y(6);
-    f(6,1) = sign(wE - y(6))*.5*Cdw*S*((wE - y(6))^2)*rho(h)/m;
-    
-    [devNS,devE] = windDevTable(h);
-    for devs = 1:2
-        n = 4*devs;
-        wNS = devs*devNS + wNS;
-        wE = devs*devE + wE;
-        f(n+3,1) = y(n+4);
-        f(n+4,1) = sign(wNS - y(n+4))*.5*Cdw*S*((wNS - y(n+4))^2)*rho(h)/m;
-        f(n+5,1) = y(n+6);
-        f(n+6,1) = sign(wE - y(n+6))*.5*Cdw*S*((wE - y(n+6))^2)*rho(h)/m;
-    end
-    
-    n = n + 4;
-    [wNS,wE] = windMaxTable(h);
-    f(n+3,1) = y(n+4);
-    f(n+4,1) = sign(wNS - y(n+4))*.5*Cdw*S*((wNS - y(n+4))^2)*rho(h)/m;
-    f(n+5,1) = y(n+6);
-    f(n+6,1) = sign(wE - y(n+6))*.5*Cdw*S*((wE - y(n+6))^2)*rho(h)/m;
+
+f(1,1) = y(2);  % Velocity
+f(2,1) = G*M/((re + h)^2) - .5*Cd*S*(y(2)^2)*rho(h)/m; % Acceleration 
+f(3,1) = y(4);  % Velocity no drag
+f(4,1) = G*M/((re + h0 - y(3))^2); % Dragless acceleration
+f(5,1) = .5*Cd*S*(y(2)^2)*rho(h)/m; % Acceleration due to drag
 
 end
