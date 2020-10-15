@@ -13,9 +13,10 @@ re = 6371000;
 R = 287.058;
 gamma = 1.597;
 
-% Include Mach/improved drag
-% a = sqrt(gamma*R*temp(h));
-% Ma = y(2)/a;
+% Include Mach
+a = sqrt(gamma*R*temp(h));
+Ma = y(2)/a;
+% Improve drag
 % [u, k] = viscosity(h);
 % Be = P*(L^2)/(u*k);
 % Re = u*L/k;
@@ -23,9 +24,7 @@ gamma = 1.597;
 
 
 f(1,1) = y(2);  % Velocity
-f(2,1) = G*M/((re + h)^2) - .5*Cd*S*(y(2)^2)*rho(h)/m; % Acceleration 
-f(3,1) = y(4);  % Velocity no drag
-f(4,1) = G*M/((re + h0 - y(3))^2); % Dragless acceleration
-f(5,1) = .5*Cd*S*(y(2)^2)*rho(h)/m; % Acceleration due to drag
+f(2,1) = G*M/((re + h)^2) - .5*Cd*S*(y(2)^2)*rho(h)/m; % Acceleration
+f(3,1) = Ma;
 
 end
