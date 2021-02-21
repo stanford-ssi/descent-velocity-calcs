@@ -20,10 +20,10 @@ Ma = y(2)/a;
 
 % Modified drag
 % [Cd,Sf,Sw,L] = CdFunct(h,t);
-[Cd,S] = CdFunct(Ma, y(2), gamma); % [ [Cf, Cp], [Sparal, Sperp] ]
+[Cd,S] = CdFunct(h, y(2), Ma); % Mach-adjusted Cd
 
 f(1,1) = y(2);  % Velocity
-f(2,1) = G*M/((re + h)^2) - .5*Cd(1)*S(1)*(y(2)^2)*rho(h)/m - .5*Cd(2)*S(2)*(y(2)^2)*rho(h)/m; % Acceleration
+f(2,1) = G*M/((re + h)^2) - .5*Cd*S*(y(2)^2)*rho(h)/m; % Acceleration
 f(3,1) = Ma;
 
 end
