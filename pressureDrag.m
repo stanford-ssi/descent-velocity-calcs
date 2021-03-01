@@ -11,4 +11,5 @@ s = shockAngle(Ma, gamma, a);
 P_1 = (P_0 * (2 * gamma * Ma^2 * (sin(s))^2 - (gamma - 1))) / (gamma + 1);
 A = (diam / 2)^2 * pi;
 dragForce = (P_1 - P_0) * A;
+disp(dragForce);
 end
